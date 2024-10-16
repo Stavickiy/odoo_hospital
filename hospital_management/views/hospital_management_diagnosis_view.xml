@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Action to open the diagnosis records -->
+    <record id="hospital_management_diagnosis_action" model="ir.actions.act_window">
+        <field name="name">Diagnoses</field>
+        <field name="res_model">hospital_management.diagnosis</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Tree view for Diagnosis -->
+    <record id="view_hospital_management_diagnosis_tree" model="ir.ui.view">
+        <field name="name">hospital_management.diagnosis.tree</field>
+        <field name="model">hospital_management.diagnosis</field>
+        <field name="arch" type="xml">
+            <tree string="Diagnosis">
+                <field name="disease_id"/>
+                <field name="doctor_id"/>
+                <field name="patient_id"/>
+                <field name="date_diagnosis"/>
+                <field name="mentor_comment_needed"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view for Diagnosis -->
+    <record id="view_hospital_management_diagnosis_form" model="ir.ui.view">
+        <field name="name">hospital_management.diagnosis.form</field>
+        <field name="model">hospital_management.diagnosis</field>
+        <field name="arch" type="xml">
+            <form string="Diagnosis">
+                <sheet>
+                    <group>
+                        <field name="disease_id"/>
+                        <field name="doctor_id"/>
+                        <field name="patient_id"/>
+                        <field name="date_diagnosis"/>
+                        <field name="mentor_comment_needed"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Medical Tests">
+                            <group>
+                                <field name="medical_test_ids" domain="[('patient_id', '=', patient_id)]">
+                                    <tree create="true" delete="true">
+                                        <field name="date_ordered"/>
+                                        <field name="patient_id"/>
+                                        <field name="doctor_id"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <page string="Prescribed treatment">
+                            <group>
+                                <field name="treatment"/>
+                            </group>
+                        </page>
+                        <page string="Mentor comment" invisible="not mentor_comment_needed and not mentor_comment">
+                            <group>
+                                <field name="mentor_comment"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search view for Diagnosis -->
+    <record id="view_hospital_management_diagnosis_search" model="ir.ui.view">
+        <field name="name">hospital_management.diagnosis.search</field>
+        <field name="model">hospital_management.diagnosis</field>
+        <field name="arch" type="xml">
+            <search string="Search Diagnoses">
+                <field name="disease_id"/>
+                <field name="doctor_id"/>
+                <field name="patient_id"/>
+                <filter string="Today" name="filter_today" domain="[('date_diagnosis', '=', context_today())]"/>
+                <filter string="Past Diagnoses" name="filter_past" domain="[('date_diagnosis', '&lt;', today())]"/>
+            </search>
+        </field>
+    </record>
+</odoo>

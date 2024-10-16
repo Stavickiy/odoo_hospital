@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_personal_doctor_history_tree" model="ir.ui.view">
+        <field name="name">hospital_management.personal_doctor.history.tree</field>
+        <field name="model">hospital_management.personal_doctor.history</field>
+        <field name="arch" type="xml">
+            <tree string="Personal Doctor History">
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <field name="appointment_date"/>
+                <field name="end_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_personal_doctor_history" model="ir.actions.act_window">
+        <field name="name">Personal Doctor History</field>
+        <field name="res_model">hospital_management.personal_doctor.history</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+</odoo>

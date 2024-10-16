@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hospital_management_doctor_schedule_form" model="ir.ui.view">
+        <field name="name">hospital_management.doctor.schedule.form</field>
+        <field name="model">hospital_management.doctor.schedule</field>
+        <field name="arch" type="xml">
+            <form string="Doctor Schedule">
+                <sheet>
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="available,booked"/>
+                    </header>
+                    <group>
+                        <field name="doctor_id" required="1" readonly="[('state', '=', 'booked')]"/>
+                        <field name="start_datetime" readonly="[('state', '=', 'booked')]"/>
+                        <field name="stop_datetime" readonly="[('state', '=', 'booked')]"/>
+                    </group>
+                    <footer>
+                        <button name="action_book_visit" string="Book Visit" type="object" class="btn-primary" invisible="state == 'booked'"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_hospital_management_doctor_schedule_tree" model="ir.ui.view">
+        <field name="name">hospital_management.doctor.schedule.tree</field>
+        <field name="model">hospital_management.doctor.schedule</field>
+        <field name="arch" type="xml">
+            <tree string="Doctor Schedules">
+                <field name="doctor_id"/>
+                <field name="start_datetime"/>
+                <field name="stop_datetime"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_doctor_schedule_calendar" model="ir.ui.view">
+        <field name="name">hospital_management.doctor.schedule.calendar</field>
+        <field name="model">hospital_management.doctor.schedule</field>
+        <field name="arch" type="xml">
+            <calendar string="display_name"
+                      date_start="start_datetime"
+                      date_stop="stop_datetime"
+                      mode="week"
+                      create="false"
+                      event_open_popup="true"
+                      quick_create="false"
+                      color="color">
+                <field name="doctor_id"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="action_hospital_management_doctor_schedule" model="ir.actions.act_window">
+        <field name="name">Doctor Schedules</field>
+        <field name="res_model">hospital_management.doctor.schedule</field>
+        <field name="view_mode">calendar,tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new Doctor Schedule.
+            </p>
+        </field>
+    </record>
+
+</odoo>

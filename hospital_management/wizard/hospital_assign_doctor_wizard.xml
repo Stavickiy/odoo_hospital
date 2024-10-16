@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- View for the Assign Doctor Wizard -->
+    <record id="view_assign_doctor_wizard_form" model="ir.ui.view">
+        <field name="name">assign.doctor.wizard.form</field>
+        <field name="model">hospital_management.assign_doctor_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Assign Doctor Wizard">
+                <group>
+                    <!-- Select the new doctor -->
+                    <field name="doctor_id"/>
+                    <!-- Display the list of patients to be assigned a new doctor (if needed) -->
+                    <field name="patient_ids" options="{'no_create': True}">
+                        <tree string="Patient List">
+                            <field name="name"/>
+                            <field name="birth_date"/>
+                            <field name="age"/>
+                            <field name="personal_doctor_id"/>
+                        </tree>
+                    </field>
+                </group>
+                <footer>
+                    <!-- Buttons for confirmation and cancellation -->
+                    <button string="Assign" type="object" name="action_assign_doctor" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="launch_assign_wizard" model="ir.actions.act_window">
+        <field name="name">Assign doctor</field>
+        <field name="res_model">hospital_management.assign_doctor_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_hospital_management_patient"/>
+        <field name="context">{'active_ids': active_ids}</field>
+    </record>
+</odoo>

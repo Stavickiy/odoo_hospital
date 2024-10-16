@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_doctor_visit_tree" model="ir.ui.view">
+        <field name="name">hospital_management.doctor.visit.tree</field>
+        <field name="model">hospital_management.doctor.visit</field>
+        <field name="arch" type="xml">
+            <tree string="Doctor Visits" create="false">
+                <field name="doctor_id"/>
+                <field name="patient_id"/>
+                <field name="start_datetime"/>
+                <field name="stop_datetime"/>
+                <field name="diagnosis_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_doctor_visit_default_form" model="ir.ui.view">
+        <field name="name">hospital_management.doctor.visit.form</field>
+        <field name="model">hospital_management.doctor.visit</field>
+        <field name="arch" type="xml">
+            <form string="Visit">
+                <header>
+                    <button name="action_visit_completed"
+                            type="object"
+                            class="btn-primary"
+                            string="COMPLETE"
+                            invisible="state == 'completed'"/>
+                    <button string="Move visit"
+                            type="object"
+                            class="btn-primary"
+                            name="action_open_move_visit_wizard"
+                            invisible="state == 'completed' or context.from_book_visit == True"/>
+                    <field name="state" widget="statusbar" statusbar_visible="planed,completed"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="doctor_id" readonly="1" required="1"/>
+                        <field name="start_datetime" readonly="1" required="1"/>
+                        <field name="stop_datetime" readonly="1" required="1"/>
+                        <field name="patient_id" required="1"/>
+                        <field name="diagnosis_id"/>
+                        <field name="state" invisible="1"/>
+                        <field name="recommendations"/>
+                    </group>
+                    <notebook>
+                        <page string="Medical Tests">
+                            <group>
+                                <field name="medical_test_ids" domain="[('patient_id', '=', patient_id)]">
+                                    <tree>
+                                        <field name="date_ordered"/>
+                                        <field name="patient_id"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_doctor_visit_calendar" model="ir.ui.view">
+        <field name="name">hospital_management.doctor.visit.calendar</field>
+        <field name="model">hospital_management.doctor.visit</field>
+        <field name="arch" type="xml">
+            <calendar string="display_name"
+                      date_start="start_datetime"
+                      date_stop="stop_datetime"
+                      mode="week"
+                      create="false"
+                      color="color"
+                      event_open_popup="true"
+                      quick_create="false">
+                <field name="doctor_id"/>
+                <field name="patient_id"/>
+                <field name="diagnosis_id"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="hospital_management_doctor_visit_action" model="ir.actions.act_window">
+        <field name="name">Doctor Visits</field>
+        <field name="res_model">hospital_management.doctor.visit</field>
+        <field name="view_mode">tree,form,calendar</field>
+        <field name="view_id" ref="view_doctor_visit_calendar"/>
+        <field name="context">{'default_start_datetime': False, 'default_stop_datetime': False}</field>
+    </record>
+</odoo>

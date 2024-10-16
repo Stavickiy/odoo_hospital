@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Action to open the disease types in hierarchy view -->
+    <record id="hospital_management_medical_test_type_action" model="ir.actions.act_window">
+        <field name="name">Test Types</field>
+        <field name="res_model">hospital_management.medical_test_type</field>
+        <field name="view_mode">tree,hierarchy,form</field>
+        <field name="context">{'hierarchize': True}</field>
+    </record>
+
+    <!-- Hierarchy view for Disease Types -->
+    <record id="hospital_management_medical_test_type_hierarchy" model="ir.ui.view">
+        <field name="name">hospital_management.medical_test_type.hierarchy</field>
+        <field name="model">hospital_management.medical_test_type</field>
+        <field name="arch" type="xml">
+            <hierarchy child_field="child_ids" draggable="1">
+                <field name="name"/>
+                <templates>
+                    <t t-name="hierarchy-box">
+                        <div t-attf-class="o_hierarchy_node_header d-flex justify-content-center pb-4"
+                             t-att-title="parent_id">
+                        </div>
+                        <div class="o_hierarchy_node_body d-flex flex-column text-center">
+                            <div class="w-100 position-relative">
+                                <field class="fw-bold" name="name"/><br/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </hierarchy>
+        </field>
+    </record>
+
+    <!-- Tree view for Disease Types -->
+    <record id="hospital_management.medical_test_type_tree" model="ir.ui.view">
+        <field name="name">hospital_management.medical_test_type.tree</field>
+        <field name="model">hospital_management.medical_test_type</field>
+        <field name="arch" type="xml">
+            <tree string="Disease Types" default_group_by="parent_id">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view for Disease Types -->
+    <record id="hospital_management.medical_test_type_form" model="ir.ui.view">
+        <field name="name">hospital_management.medical_test_type.form</field>
+        <field name="model">hospital_management.medical_test_type</field>
+        <field name="arch" type="xml">
+            <form string="Test Type">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <!-- Adding hierarchical view in the selection of the parent -->
+                        <field name="parent_id" context="{'default_parent_id': parent_id}"
+                               options="{'tree_view_ref': 'hospital_management.medical_test_type.tree'}"/>
+                    </group>
+                    <group>
+                        <field name="child_ids">
+                            <tree>
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search view for Disease Types -->
+    <record id="hospital_management_medical_test_type_tree_search" model="ir.ui.view">
+        <field name="name">hospital_management.medical_test_type.tree.search</field>
+        <field name="model">hospital_management.medical_test_type</field>
+        <field name="arch" type="xml">
+            <search string="Search Test Types">
+                <field name="name"/>
+                <field name="parent_id"/>
+                <filter string="Root Types" name="root_types" domain="[('parent_id', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+</odoo>

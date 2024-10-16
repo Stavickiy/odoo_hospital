@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hospital_management_disease_directory_action" model="ir.actions.act_window">
+        <field name="name">Diseases</field>
+        <field name="res_model">hospital_management.disease.directory</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_disease_directory_tree" model="ir.ui.view">
+        <field name="name">hospital_management.disease.directory.tree</field>
+        <field name="model">hospital_management.disease.directory</field>
+        <field name="arch" type="xml">
+            <tree string="Disease Directory" default_group_by="['parent_type_id', 'type_id']">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_specific_disease_directory_tree" model="ir.ui.view">
+        <field name="name">hospital_management.disease.directory.tree</field>
+        <field name="model">hospital_management.disease.directory</field>
+        <field name="arch" type="xml">
+            <tree string="Disease Directory">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_disease_directory_form" model="ir.ui.view">
+        <field name="name">hospital_management.disease.directory.form</field>
+        <field name="model">hospital_management.disease.directory</field>
+        <field name="arch" type="xml">
+            <form string="Disease Directory">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="type_id" hierarchize="True"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

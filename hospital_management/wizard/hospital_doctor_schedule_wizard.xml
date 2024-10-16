@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Визард для создания расписания врача -->
+    <record id="view_doctor_schedule_wizard_form" model="ir.ui.view">
+        <field name="name">doctor.schedule.wizard.form</field>
+        <field name="model">hospital_management.doctor.schedule.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Generate Doctor Schedule">
+                <group>
+                    <field name="doctor_id" required="1"/>
+                </group>
+                <group string="Even Week">
+                    <field name="even_week_start_time" widget="float_time" required="1"/>
+                    <field name="even_week_end_time" widget="float_time" required="1"/>
+                </group>
+                <group string="Odd Week">
+                    <field name="odd_week_start_time" widget="float_time" required="1"/>
+                    <field name="odd_week_end_time" widget="float_time" required="1"/>
+                </group>
+                <footer>
+                    <button string="Generate" type="object" name="action_generate_schedule" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Действие для открытия визарда -->
+    <record id="action_open_doctor_schedule_wizard" model="ir.actions.act_window">
+        <field name="name">Generate Doctor Schedule</field>
+        <field name="res_model">hospital_management.doctor.schedule.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

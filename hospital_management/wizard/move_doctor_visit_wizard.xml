@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_move_doctor_visit_wizard_form" model="ir.ui.view">
+        <field name="name">move.doctor.visit.wizard.form</field>
+        <field name="model">hospital_management.move_doctor_visit_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Move doctor visit">
+                <group>
+                    <field name="new_doctor_id" options="{'no_create': True}" />
+                    <field name="available_slot_id"/>
+                </group>
+                <footer>
+                    <button string="Move" type="object" class="btn-primary" name="move_doctor_visit"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

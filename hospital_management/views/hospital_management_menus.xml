@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Главное меню -->
+    <menuitem id="hospital_management_menu_root" name="Hospital"/>
+
+    <!-- Меню докторов -->
+    <menuitem id="hospital_management_doctor_menu"
+              name="Doctors"
+              parent="hospital_management_menu_root"/>
+
+    <menuitem id="hospital_management_doctor_visit_menu"
+              parent="hospital_management_doctor_menu"
+              action="hospital_management_doctor_visit_action"/>
+
+    <menuitem id="hospital_management_doctor_menu_action"
+              parent="hospital_management_doctor_menu"
+              action="hospital_management_doctor_action"/>
+    <menuitem id="menu_hospital_management_doctor_schedules"
+              name="Doctor Schedules"
+              parent="hospital_management_doctor_menu"/>
+    <menuitem id="menu_hospital_management_doctor_schedule"
+              name="Schedules"
+              parent="menu_hospital_management_doctor_schedules"
+              action="action_hospital_management_doctor_schedule"/>
+    <menuitem id="menu_generate_doctor_schedule"
+              name="Generate New Schedule"
+              parent="menu_hospital_management_doctor_schedules"
+              action="action_open_doctor_schedule_wizard"/>
+
+    <menuitem id="menu_hospital_management_personal_doctor_history"
+              name="Personal Doctor History"
+              parent="hospital_management_doctor_menu"
+              action="action_personal_doctor_history"/>
+
+
+    <!-- Меню пациентов -->
+    <menuitem id="hospital_management_patient_menu"
+              name="Patients"
+              parent="hospital_management_menu_root"/>
+    <menuitem id="hospital_management_patient_menu_action"
+              name="Patients"
+              parent="hospital_management_patient_menu"
+              action="hospital_management_patient_action"/>
+    <menuitem id="hospital_management_diagnosis_menu_action"
+              parent="hospital_management_patient_menu"
+              action="hospital_management_diagnosis_action"/>
+
+    <!-- Меню заболеваний -->
+    <menuitem id="hospital_management_disease_directory_menu"
+              name="Disease Directory"
+              parent="hospital_management_menu_root"/>
+    <menuitem id="hospital_management_disease_directory_menu_action"
+              parent="hospital_management_disease_directory_menu"
+              action="hospital_management_disease_directory_action"/>
+    <menuitem id="action_disease_type"
+              parent="hospital_management_disease_directory_menu"
+              action="hospital_management_disease_type_action"/>
+
+    <menuitem id="hospital_management_medical_tests_menu"
+              name="Medical Tests"
+              parent="hospital_management_menu_root"/>
+    <menuitem id="hospital_management_medical_test_menu_action"
+              parent="hospital_management_medical_tests_menu"
+              action="hospital_management_medical_test_action"/>
+    <menuitem id="hospital_management_medical_test_type_menu_action"
+              parent="hospital_management_medical_tests_menu"
+              action="hospital_management_medical_test_type_action"/>
+    <menuitem id="menu_sample_test_type"
+              parent="hospital_management_medical_tests_menu"
+              action="action_sample_test_type"/>
+
+    <menuitem id="hospital_management_reports_menu"
+              name="Reports"
+              parent="hospital_management_menu_root"/>
+    <menuitem id="menu_disease_report"
+              name="Disease report"
+              parent="hospital_management_reports_menu"
+              action="action_disease_report_wizard"/>
+</odoo>

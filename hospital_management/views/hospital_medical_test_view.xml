@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hospital_management_medical_test_form" model="ir.ui.view">
+        <field name="name">hospital_management.medical_test.form</field>
+        <field name="model">hospital_management.medical_test</field>
+        <field name="arch" type="xml">
+            <form string="Medical Test">
+                <group>
+                    <field name="patient_id"/>
+                    <field name="medical_test_type_id"/>
+                    <field name="doctor_id"/>
+                    <field name="sample_id"/>
+                    <field name="date_ordered"/>
+                    <field name="conclusions"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="hospital_management_medical_test_tree" model="ir.ui.view">
+        <field name="name">hospital_management.medical_test.tree</field>
+        <field name="model">hospital_management.medical_test</field>
+        <field name="arch" type="xml">
+            <tree string="Medical Tests">
+                <field name="patient_id"/>
+                <field name="medical_test_type_id"/>
+                <field name="doctor_id"/>
+                <field name="sample_id"/>
+                <field name="date_ordered"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="hospital_management_medical_test_action" model="ir.actions.act_window">
+        <field name="name">Medical Tests</field>
+        <field name="res_model">hospital_management.medical_test</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
