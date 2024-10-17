@@ -3,6 +3,11 @@ from odoo.exceptions import ValidationError
 
 
 class DiseaseType(models.Model):
+    """
+    Model representing the types of diseases in the hospital management system.
+    This model supports a hierarchical structure for organizing diseases by type,
+    with a parent-child relationship. It includes validation to prevent recursive loops in the hierarchy.
+    """
     _name = 'hospital_management.disease.type'
     _description = 'Disease Type'
     _parent_store = True
@@ -18,15 +23,27 @@ class DiseaseType(models.Model):
 
     @api.depends('disease_ids')
     def _compute_exist_relation_disease(self):
+        """
+        Compute method that sets 'exist_relation_disease' to True if the disease type
+        has associated diseases, otherwise False.
+        """
         for record in self:
             record.exist_relation_disease = bool(record.disease_ids)
 
     @api.constrains('parent_id')
     def _check_hierarchy(self):
+        """
+        Constraint method to prevent recursive loops in the hierarchy by checking
+        if the assigned parent type creates a circular reference.
+        """
         if not self._check_recursion():
             raise ValidationError("You cannot assign a parent that would cause a recursive loop.")
 
     def action_show_related_diseases(self):
+        """
+        Action method to show all diseases related to this disease type.
+        It opens a new window displaying the diseases associated with this type in a tree view.
+        """
         return {
             'type': 'ir.actions.act_window',
             'name': 'Diseases',

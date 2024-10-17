@@ -1,6 +1,13 @@
 from odoo import models, fields
 
+
 class PersonalDoctorHistory(models.Model):
+    """
+    Model representing the history of a personal doctor assigned to a patient.
+    This model keeps track of the relationship between a patient and their
+    assigned personal doctor, including the duration of that assignment.
+    """
+
     _name = 'hospital_management.personal_doctor.history'
     _description = 'Personal Doctor History'
 

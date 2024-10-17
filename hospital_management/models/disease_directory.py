@@ -2,6 +2,11 @@ from odoo import models, fields
 
 
 class DiseaseDirectory(models.Model):
+    """
+    Model representing the directory of diseases in the hospital management system.
+    It stores information about different diseases and their types, including
+    hierarchical relationships between disease types.
+    """
     _name = 'hospital_management.disease.directory'
     _description = 'Disease Directory'
 
