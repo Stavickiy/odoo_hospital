@@ -102,6 +102,15 @@ class DoctorVisit(models.Model):
         for record in self:
             if record.diagnosis_id:
                 raise ValidationError(_("You cannot delete a visit that has a diagnosis."))
+
+            old_schedule = self.env['hospital_management.doctor.schedule'].search([
+                ('doctor_id', '=', record.doctor_id.id),
+                ('start_datetime', '=', record.start_datetime),
+                ('stop_datetime', '=', record.stop_datetime),
+                ('state', '=', 'booked')
+            ])
+            if old_schedule:
+                old_schedule.state = 'available'
         return super(DoctorVisit, self).unlink()
 
     def action_open_move_visit_wizard(self):

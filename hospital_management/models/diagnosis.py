@@ -13,7 +13,6 @@ class Diagnosis(models.Model):
     treatment = fields.Text(string='Prescribed treatment')
     date_diagnosis = fields.Date(string='Date of Diagnosis', default=date.today(), required=True)
     mentor_comment = fields.Text(string='Mentor comment')
-
     mentor_comment_needed = fields.Boolean(string='Mentor comment needed',
                                            compute='_compute_mentor_comment_needed',
                                            store=True,

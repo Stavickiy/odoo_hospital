@@ -26,7 +26,7 @@
                             type="object"
                             class="btn-primary"
                             string="COMPLETE"
-                            invisible="state == 'completed'"/>
+                            invisible="state == 'completed' or context.from_book_visit == True"/>
                     <button string="Move visit"
                             type="object"
                             class="btn-primary"

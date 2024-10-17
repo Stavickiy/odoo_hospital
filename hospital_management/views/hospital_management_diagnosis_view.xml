@@ -17,7 +17,7 @@
                 <field name="doctor_id"/>
                 <field name="patient_id"/>
                 <field name="date_diagnosis"/>
-                <field name="mentor_comment_needed"/>
+                <field name="mentor_comment_needed" readonly="1"/>
             </tree>
         </field>
     </record>
